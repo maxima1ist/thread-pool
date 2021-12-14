@@ -1,6 +1,6 @@
 #pragma once
 
-#include "function_pool.h"
+#include "FunctionPool.h"
 
 #include <thread>
 #include <vector>
@@ -14,25 +14,25 @@ public:
     explicit ThreadPool(int count = thread::hardware_concurrency()) : functionPool() {
         for (int i = 0; i < count; ++i)
         {
-            threads.push_back(thread(&Function_pool::infinite_loop_func, &functionPool));
+            threads.push_back(thread(&FunctionPool::generateListner, &functionPool));
         }
     }
 
     ~ThreadPool()
     {
-        functionPool.done();
-        for (unsigned int i = 0; i < threads.size(); i++)
+        functionPool.stopListner();
+        for (size_t i = 0; i < threads.size(); ++i)
         {
             threads.at(i).join();
         }
     }
 
-    template<typename Functor>
-    void push(Functor callable)
+    void push(FunctionPool::Functor callable)
     {
         functionPool.push(callable);
     }
+
 private:
-    Function_pool functionPool;
+    FunctionPool functionPool;
     vector<thread> threads;
 };

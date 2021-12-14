@@ -2,18 +2,20 @@
 
 #include <iostream>
 
+using std::cout;
+
 int num = 0;
 
 void func()
 {
     for (size_t i = 0; i < 1e9; ++i);
-    std::cout << num++ << '\n';
+    cout << num++ << '\n';
 }
 
 int main()
 {
     ThreadPool threadPool;
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 30; i++)
     {
         threadPool.push(func);
     }
