@@ -3,7 +3,8 @@
 FunctionPool::FunctionPool() : functionsQueue(),
                                globalLocker(),
                                listner(),
-                               listnerStopped(false) {}
+                               listnerStopped(false),
+                               listnerEnded(false) {}
 
 void FunctionPool::push(FunctionPool::Functor func)
 {
@@ -16,6 +17,16 @@ void FunctionPool::push(FunctionPool::Functor func)
 void FunctionPool::stopListner()
 {
     listnerStopped = true;
+}
+
+void FunctionPool::startListner()
+{
+    listnerStopped = false;
+}
+
+void FunctionPool::endListner()
+{
+    listnerEnded = true;
     listner.notify_all();
 }
 
@@ -27,9 +38,9 @@ void FunctionPool::generateListner()
         FunctionPool::Locker locker(globalLocker);
         listner.wait(locker, [this]()
         {
-            return !functionsQueue.empty() || listnerStopped;
+            return !listnerStopped && (!functionsQueue.empty() || listnerEnded);
         });
-        if (listnerStopped && functionsQueue.empty())
+        if (listnerEnded && functionsQueue.empty())
         {
             break;
         }
