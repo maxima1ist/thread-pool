@@ -3,11 +3,13 @@ cmake_minimum_required(VERSION 3.5)
 project(ThreadPool)
 
 set(SOURCES 
-        src/main.cpp 
+        src/main.cpp
+        src/ThreadPool.cpp
+        src/FunctionPool.cpp
 )
 set(HEADERS
-        src/ThreadPool.h
-        src/FunctionPool.h
+        src/ThreadPool.hpp
+        src/FunctionPool.hpp
 )
 add_executable(ThreadPool ${SOURCES} ${HEADERS})
 
