@@ -15,10 +15,17 @@ void func()
 int main()
 {
     ThreadPool threadPool;
+    for (int i = 0; i < 15; i++)
+    {
+        threadPool.push(func);
+    }
+    threadPool.stop();
+
     for (int i = 0; i < 30; i++)
     {
         threadPool.push(func);
     }
+    threadPool.start();
 
     return 0;
 }

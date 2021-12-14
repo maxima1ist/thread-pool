@@ -10,7 +10,7 @@ ThreadPool::ThreadPool(int count) : functionPool()
 
 ThreadPool::~ThreadPool()
 {
-    functionPool.stopListner();
+    functionPool.endListner();
     for (size_t i = 0; i < threads.size(); ++i)
     {
         threads.at(i).join();
@@ -20,4 +20,14 @@ ThreadPool::~ThreadPool()
 void ThreadPool::push(FunctionPool::Functor callable)
 {
     functionPool.push(callable);
+}
+
+void ThreadPool::stop()
+{
+    functionPool.stopListner();
+}
+
+void ThreadPool::start()
+{
+    functionPool.startListner();
 }

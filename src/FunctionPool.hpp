@@ -22,10 +22,13 @@ public:
 
     void push(Functor func);
     void stopListner();
+    void startListner();
+    void endListner();
     void generateListner();
 private:
     deque<Functor> functionsQueue;
     mutex globalLocker;
     condition_variable listner;
+    atomic<bool> listnerEnded;
     atomic<bool> listnerStopped;
 };

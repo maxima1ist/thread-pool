@@ -15,6 +15,9 @@ public:
     ~ThreadPool();
 
     void push(FunctionPool::Functor callable);
+
+    void stop();
+    void start();
 private:
     FunctionPool functionPool;
     vector<thread> threads;
