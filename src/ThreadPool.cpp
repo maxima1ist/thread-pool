@@ -1,6 +1,6 @@
 #include "ThreadPool.hpp"
 
-ThreadPool::ThreadPool(int count) : functionPool()
+ThreadPool::ThreadPool(int count) : functionPool(), count(count)
 {
     for (int i = 0; i < count; ++i)
     {
@@ -15,6 +15,11 @@ ThreadPool::~ThreadPool()
     {
         threads.at(i).join();
     }
+}
+
+int ThreadPool::getCount() const
+{
+    return count;
 }
 
 void ThreadPool::push(FunctionPool::Functor callable)

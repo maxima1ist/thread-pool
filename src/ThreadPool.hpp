@@ -14,6 +14,8 @@ public:
     explicit ThreadPool(int count = thread::hardware_concurrency());
     ~ThreadPool();
 
+    int getCount() const;
+
     void push(FunctionPool::Functor callable);
 
     void stop();
@@ -21,4 +23,5 @@ public:
 private:
     FunctionPool functionPool;
     vector<thread> threads;
+    int count;
 };
