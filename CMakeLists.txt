@@ -13,6 +13,7 @@ set(HEADERS
         src/FunctionPool.hpp
 )
 add_executable(ThreadPool ${SOURCES} ${HEADERS})
+add_executable(Client src/Client.cpp)
 
 # specify c++ version
 set_target_properties(
@@ -35,3 +36,4 @@ if(Boost_FOUND)
 endif(Boost_FOUND)
 set(USED_LIBS ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_REGEX_LIBRARY})
 target_link_libraries(ThreadPool ${USED_LIBS})
+target_link_libraries(Client ${USED_LIBS})
