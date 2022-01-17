@@ -4,7 +4,7 @@ ThreadPool::ThreadPool(int count) : functionPool(), count(count)
 {
     for (int i = 0; i < count; ++i)
     {
-        threads.push_back(thread(&FunctionPool::generateListner, &functionPool));
+        threads.push_back(std::thread(&FunctionPool::generateListner, &functionPool));
     }
 }
 
