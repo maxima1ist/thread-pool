@@ -1,2 +1,2 @@
 # thread-pool
-Implementation of Thread pool in C++ language.
+Implementation of Client-Server application using custom Thread pool implementation to accelerate calculation on Server side in C++ language.
