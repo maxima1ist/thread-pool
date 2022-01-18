@@ -41,6 +41,7 @@ void processing(int& start, int end)
                 mutex.lock();
                 if (start >= end)
                 {
+                    mutex.unlock();
                     break;
                 }
                 ++start;
