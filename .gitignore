@@ -1,5 +1,6 @@
 # CMake builds
 .build
+build
 
 # VC Code files
 .vscode
