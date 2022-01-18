@@ -1,3 +1,3 @@
 #!/bin/bash
 
-(cd .build/Server && ./Server)
+(cd build/Server && ./Server)

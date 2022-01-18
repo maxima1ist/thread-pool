@@ -1,3 +1,3 @@
 #!/bin/bash
 
-(cd .build/Client && ./Client)
+(cd build/Client && ./Client)
