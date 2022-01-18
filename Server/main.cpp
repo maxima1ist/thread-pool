@@ -62,27 +62,31 @@ int main()
 
         tcp::acceptor acceptor(ioContext, tcp::endpoint(tcp::v4(), 1234));
 
-        std::cout << "Accepting the connection on the port 1234!\n";
-        tcp::socket socket(ioContext);
+        while (true)
+        {
+            std::cout << "Accepting the connection on the port 1234!\n";
+            tcp::socket socket(ioContext);
 
-        std::cout << "Waiting for the connection!\n";
-        acceptor.accept(socket);
-        
-        boost::system::error_code errorCode;
-        const std::string messageFromClient(readDataFromClient(socket, errorCode));
+            std::cout << "Waiting for the connection!\n";
+            acceptor.accept(socket);
+            
+            boost::system::error_code errorCode;
+            const std::string messageFromClient(readDataFromClient(socket, errorCode));
 
-        // splitting the message of client in ' ' char
-        std::vector<std::string> out;
-        tokenize(messageFromClient, ' ', out); 
+            // splitting the message of client in ' ' char
+            std::vector<std::string> out;
+            tokenize(messageFromClient, ' ', out); 
 
-        // start "powerful" processing
-        int start = atoi(out[0].c_str()), end = atoi(out[1].c_str());
-        processing(start, end);
-        std::string messageToClient(std::to_string(start));
+            // start "powerful" processing
+            int start = atoi(out[0].c_str()), end = atoi(out[1].c_str());
+            processing(start, end);
+            std::string messageToClient(std::to_string(start));
 
-        std::cout << "The processing done.\n";
+            std::cout << "The processing done.\n";
 
-        boost::asio::write(socket, boost::asio::buffer(messageToClient), errorCode);
+            boost::asio::write(socket, boost::asio::buffer(messageToClient), errorCode);
+
+        }
     }
     catch (const std::exception& exception)
     {
